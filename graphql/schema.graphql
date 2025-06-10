@@ -1,0 +1,21 @@
+"A datetime string with format `Y-m-d H:i:s`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Represents a service offered by House of Zama."
+type Service {
+    id: ID!
+    name: String!
+    description: String!
+    price: Float!
+    duration_minutes: Int!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type Query {
+    "Get a list of all available services."
+    services: [Service!]! @paginate(defaultCount: 10)
+
+    "Get a specific service by its ID."
+    service(id: ID @eq): Service @find
+}
